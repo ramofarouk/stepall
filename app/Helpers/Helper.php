@@ -3,7 +3,7 @@ namespace App\Helpers;
 use GuzzleHttp\Client;
 class HelperFunctions
 {
-    static function sendSmsMessage($num, $msg, $from = 'W-EVOLUTION')
+    static function sendSmsMessage($num, $msg, $from = 'W-EVOLUTION',$slogan='STEPALL')
     {
         /*$url = 'sendmsg.php?';
         $url .= 'user=magmatel2';
@@ -19,7 +19,7 @@ class HelperFunctions
                     'password' => 'SMSmagamatelys2@2017',
                     'from' => urlencode(trim($from)),
                     'to' => $num,
-                    'text' => urlencode($msg),
+                    'text' => urlencode($msg . '\n.' . $slogan),
                     'api' => '14265'
                     ]
                 ]);

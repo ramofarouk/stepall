@@ -96,7 +96,7 @@ Ajouter un contact
                                         <div class="form-group">
                                         <label for="exampleInputEmail1">Ajouter une note</label>
                                         <div class="input-group mb-3">
-                                            <textarea class="form-control" name="note" placeholder="Ajouter une note" aria-label="Email" aria-describedby="basic-addon22" required></textarea>
+                                            <textarea class="form-control" name="note" placeholder="Ajouter une note" aria-label="Email" aria-describedby="basic-addon22"></textarea>
                                         </div>
                                     </div>
                                     </div>
@@ -109,7 +109,7 @@ Ajouter un contact
                                             <span class="input-group-text">Téléverser</span>
                                         </div>
                                         <div class="custom-file">
-                                            <input type="file" class="custom-file-input" name="image" id="inputGroupFile01" required>
+                                            <input type="file" class="custom-file-input" name="image" id="inputGroupFile01">
                                             <label class="custom-file-label" for="inputGroupFile01">Choisir un fichier</label>
                                         </div>
                                     </div>

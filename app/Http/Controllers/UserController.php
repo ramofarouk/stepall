@@ -50,10 +50,12 @@ class UserController extends Controller
                     $newUser->pseudo = $data['pseudo'];
                     $newUser->email = $data['email'];
                     $newUser->telephone = $data['phone'];
-                    $newUser->status = 1;
+                    $newUser->status = 0;
                     $newUser->password = bcrypt($data['password']);
                     $code = mt_rand(1000, 9999);
                     $newUser->code = $code;
+                    $result = HelperFunctions::sendSmsMessage($data['phone'], 'Code de verification : ' .$code , 'Step2All');
+                    $array =  explode(' ', $result);
                     $newUser->save();
                     $request->session()->put('code', $code);
                     return redirect('/verification')->with('code', $code);
@@ -93,7 +95,7 @@ class UserController extends Controller
             $data = $request->input();
             if ($data['code_true'] == $data['code']) {
                 User::where(['code' => $data['code_true']])->update([
-                    'active' => 1
+                    'status' => 1
                 ]);
                 $user = User::where(['code' => $data['code_true']])->first();
                 /*echo "<pre>";

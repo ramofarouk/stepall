@@ -17,21 +17,27 @@ class ContactController extends Controller
         if ($request->isMethod('post')) {
             //Getting file and analyse
             $this->validate($request, [
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,max=4048',
+                'image' => 'image|mimes:jpeg,png,jpg,gif,svg,max=4048',
             ]);
             $data = $request->input();
             $image = $request->file('image');
             $user = User::where(['email' => Auth::user()->email])->first();
             $repertoire = Repertoire::where(['id_user' => $user['id']])->first();
-            $fileInfo['imagename'] = $data['first_name'] . '_' . $data['last_name'] . '_' .  $user['id'] . time() . '.' . $image->getClientOriginalExtension();
+            if(isset($image)){
+                $fileInfo['imagename'] = $data['first_name'] . '_' . $data['last_name'] . '_' .  $user['id'] . time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('/mes_contacts');
             $image->move($destinationPath, $fileInfo['imagename']);
+            }
             $newContact = new Contact;
             $newContact->id_repertoire = $repertoire['id'];
             $newContact->first_name = $data['first_name'];
             $newContact->last_name = $data['last_name'];
-            $newContact->url_photo = 'mes_contacts/' . $fileInfo['imagename'];
-            $newContact->note = $data['note'];
+            if(isset($image)){
+                $newContact->url_photo = 'mes_contacts/' . $fileInfo['imagename'];
+            }
+            if(isset($data['note'])){
+                $newContact->note = $data['note'];
+            }
             $newContact->save();
             $i = 1;
             while (isset($data['phone' . $i])) {
@@ -73,7 +79,7 @@ class ContactController extends Controller
                                     <td>' . $contact->first_name . '</td>
                                     <td><span class="label label-success">' . $contact->note . ' </span></td>
                                     <td>
-                                        <a ><img  src="/' . $contact->url_photo . '"  alt="' . $contact->last_name . ' ' . $contact->first_name . '"  class= "rounded-circle" width="75" /></a>
+                                        <a ><img  src="' . $contact->url_photo . '"  alt="' . $contact->last_name . ' ' . $contact->first_name . '"  class= "rounded-circle" width="75" /></a>
                                     </td>
                                     <td>
                                         <a href="/user/view-contacts/' .  $contact->id . '" class="btn btn-info">

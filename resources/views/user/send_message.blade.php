@@ -87,7 +87,7 @@ Envoyer un message
                                 <div class="row">
                                     <div class="col-sm-2">
                                         <div class="form-group">
-                                             <input id="phone1" name="phone1" type="tel" class="form-control" required>
+                                             <input id="phone1" name="phone1" type="tel" class="form-control" >
                                         </div>
                                     </div>
                                     <div class="col-sm-2">
@@ -108,7 +108,7 @@ Envoyer un message
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <div class="form-group">
-                                <select class="select2 form-control custom-select" name="old_tel1" id="old_tel1" style="width: 100%; height:36px;" required>
+                                <select class="select2 form-control custom-select" name="old_tel1" id="old_tel1" style="width: 100%; height:36px;">
 
                                 </select>
                                         </div>
